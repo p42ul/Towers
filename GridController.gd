@@ -50,5 +50,8 @@ func _on_tower_removed(x, y):
 func _on_find_path():
 	print("finding path")
 	var path = aStar.get_id_path(0, width*height-1)
+	if path.size() < 2:
+		print("couldn't find path")
+		return
 	for grid_id in path:
 		grid[grid_id].flash_color(Color.aquamarine)

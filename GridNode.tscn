@@ -33,4 +33,3 @@ wait_time = 2.0
 one_shot = true
 
 [connection signal="input_event" from="." to="." method="_input_event"]
-[connection signal="timeout" from="ColorResetTimer" to="." method="_on_color_reset_color"]

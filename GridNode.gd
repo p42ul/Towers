@@ -2,7 +2,6 @@ extends Area2D
 
 var x
 var y
-var last_color
 var has_tower = false
 
 signal tower_created(x, y)
@@ -13,6 +12,13 @@ func _input_event(viewport, event, shape_idx):
 		create_tower()
 	elif Input.is_action_pressed("grid_remove"):
 		remove_tower()
+		
+func _process(delta):
+	if $ColorResetTimer.is_stopped():
+		if has_tower:
+			$ColorRect.color = Color.rosybrown
+		else:
+			$ColorRect.color = Color.white
 
 func set_size(r: int):
 	$ColorRect.rect_size = Vector2(r, r)
@@ -28,22 +34,16 @@ func set_size(r: int):
 func create_tower():
 	if has_tower:
 		return
-	$ColorRect.color = Color.rosybrown
 	emit_signal("tower_created", x, y)
 	has_tower = true
 	
-	
+
 func remove_tower():
 	if not has_tower:
 		return
-	$ColorRect.color = Color.white
 	emit_signal("tower_removed", x, y)
 	has_tower = false
 
 func flash_color(color):
-	last_color = $ColorRect.color
 	$ColorRect.color = color
 	$ColorResetTimer.start()
-
-func _on_color_reset_color():
-	$ColorRect.color = last_color

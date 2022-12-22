@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var width = 20
 var height = 10
@@ -40,18 +40,22 @@ func _get_node_id(x, y):
 func _on_tower_created(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, true)
-	print("tower created: " + str(x) + ", " + str(y))
 	
 func _on_tower_removed(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, false)
-	print("tower removed: " + str(x) + ", " + str(y))
 
 func _on_find_path():
-	print("finding path")
 	var path = aStar.get_id_path(0, width*height-1)
 	if path.size() < 2:
 		print("couldn't find path")
 		return
+	var curve = $MobPath.get_curve()
+	curve.clear_points()
 	for grid_id in path:
+		curve.add_point(grid[grid_id].position)
 		grid[grid_id].flash_color(Color.aquamarine)
+
+func _process(delta):
+	var follower = $MobPath/MobPathFollower
+	follower.unit_offset += delta / 10

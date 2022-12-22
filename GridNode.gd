@@ -36,7 +36,6 @@ func create_tower():
 		return
 	emit_signal("tower_created", x, y)
 	has_tower = true
-	
 
 func remove_tower():
 	if not has_tower:

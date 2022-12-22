@@ -24,10 +24,12 @@ grid_node = ExtResource( 3 )
 [node name="MobPath" type="Path2D" parent="GridController"]
 z_index = 1
 curve = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MobPathFollower" type="PathFollow2D" parent="GridController/MobPath"]
-position = Vector2( 13.7879, 0 )
-offset = nan
+lookahead = 20.0
 
 [node name="ColorRect" type="ColorRect" parent="GridController/MobPath/MobPathFollower"]
 light_mask = 2
@@ -36,6 +38,13 @@ margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
 color = Color( 0.968627, 1, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="GridController/MobPath/MobPathFollower"]
+margin_left = 15.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 0.0431373, 0.0392157, 0.0392157, 1 )
 
 [node name="FindPathButton" type="Button" parent="GridController"]
 margin_left = 628.0

@@ -53,7 +53,9 @@ func _on_find_path():
 	var curve = $MobPath.get_curve()
 	curve.clear_points()
 	for grid_id in path:
-		curve.add_point(grid[grid_id].position)
+		var x = grid[grid_id].position.x + grid_node_size / 2
+		var y = grid[grid_id].position.y + grid_node_size / 2
+		curve.add_point(Vector2(x, y))
 		grid[grid_id].flash_color(Color.aquamarine)
 
 func _process(delta):

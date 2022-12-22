@@ -1,16 +1,20 @@
 extends Node2D
 
-var width = 20
-var height = 10
+var width = 24
+var height = 12
 
 var grid_node_size = 40
 
 var grid = []
 var aStar
+var valid_path = false
+
+var follower
 
 export(PackedScene) var grid_node
 
 func _ready():
+	follower = $MobPath/MobPathFollower
 	aStar = AStar2D.new()
 	aStar.reserve_space(width*height)
 	grid.resize(width*height)
@@ -40,24 +44,26 @@ func _get_node_id(x, y):
 func _on_tower_created(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, true)
+	recalculate_path()
 	
 func _on_tower_removed(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, false)
+	recalculate_path()
 
-func _on_find_path():
+func recalculate_path():
 	var path = aStar.get_id_path(0, width*height-1)
 	if path.size() < 2:
-		print("couldn't find path")
+		valid_path = false
 		return
+	valid_path = true
 	var curve = $MobPath.get_curve()
 	curve.clear_points()
 	for grid_id in path:
 		var x = grid[grid_id].position.x + grid_node_size / 2
 		var y = grid[grid_id].position.y + grid_node_size / 2
 		curve.add_point(Vector2(x, y))
-		grid[grid_id].flash_color(Color.aquamarine)
 
 func _process(delta):
-	var follower = $MobPath/MobPathFollower
-	follower.unit_offset += delta / 10
+	if valid_path:
+		follower.unit_offset += delta / 10

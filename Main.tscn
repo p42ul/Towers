@@ -1,19 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/DungeonCrawl_ProjectUtumnoTileset.png" type="Texture" id=1]
 [ext_resource path="res://tower_grid/GridController.gd" type="Script" id=2]
 [ext_resource path="res://tower_grid/GridNode.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/fonts/Montreal-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Main.gd" type="Script" id=5]
 
 [sub_resource type="Curve2D" id=2]
 _data = {
 "points": PoolVector2Array(  )
 }
-
-[sub_resource type="DynamicFont" id=1]
-size = 64
-font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 5 )
@@ -33,16 +28,7 @@ __meta__ = {
 lookahead = 20.0
 
 [node name="Sprite" type="Sprite" parent="GridController/MobPath/MobPathFollower"]
+position = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 32, 32, 32, 32 )
-
-[node name="FindPathButton" type="Button" parent="GridController"]
-margin_left = 628.0
-margin_top = 529.0
-margin_right = 948.0
-margin_bottom = 614.0
-custom_fonts/font = SubResource( 1 )
-text = "Find Path"
-
-[connection signal="pressed" from="GridController/FindPathButton" to="GridController" method="_on_find_path"]
+region_rect = Rect2( 672, 256, 32, 32 )

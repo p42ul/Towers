@@ -74,6 +74,11 @@ func recalculate_path():
 		var x = grid[grid_id].position.x + grid_node_size / 2
 		var y = grid[grid_id].position.y + grid_node_size / 2
 		curve.add_point(Vector2(x, y))
+	# Redraw the path
+	self.update()
+
+func _draw():
+	draw_polyline($MobPath.curve.get_baked_points(), Color.aquamarine, 5, true)
 
 func _process(delta):
 	if valid_path:

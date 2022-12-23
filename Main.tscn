@@ -32,3 +32,5 @@ position = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 672, 256, 32, 32 )
+
+[node name="MobSpawner" type="Node2D" parent="."]

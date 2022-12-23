@@ -3,19 +3,18 @@ extends Node2D
 var width = 24
 var height = 12
 
+var grid_node_size = 32
+
 var start_grid_id = width*height + 1
 var end_grid_id = width*height + 2
 
-var grid_node_size = 32
-
 var grid = []
-var aStar
+var aStar = AStar2D.new()
 var valid_path = false
 
 export(PackedScene) var grid_node
 
 func _ready():
-	aStar = AStar2D.new()
 	aStar.reserve_space(width*height+2)
 	grid.resize(width*height)
 	aStar.add_point(start_grid_id, Vector2(-grid_node_size, height/2))

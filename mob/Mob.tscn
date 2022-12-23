@@ -1,15 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/DungeonCrawl_ProjectUtumnoTileset.png" type="Texture" id=1]
 [ext_resource path="res://mob/Mob.gd" type="Script" id=2]
 
-[node name="Mob" type="PathFollow2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Mob" type="PathFollow2D" groups=["mob"]]
 loop = false
 lookahead = 20.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 672, 256, 32, 32 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

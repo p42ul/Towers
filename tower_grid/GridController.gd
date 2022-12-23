@@ -12,12 +12,9 @@ var grid = []
 var aStar
 var valid_path = false
 
-var follower
-
 export(PackedScene) var grid_node
 
 func _ready():
-	follower = $MobPath/MobPathFollower
 	aStar = AStar2D.new()
 	aStar.reserve_space(width*height+2)
 	grid.resize(width*height)
@@ -66,7 +63,7 @@ func recalculate_path():
 		valid_path = false
 		return
 	valid_path = true
-	var curve = $MobPath.get_curve()
+	var curve = $MobSpawner/MobPath.get_curve()
 	curve.clear_points()
 	# Strip the first and last path entry, which aren't in the grid
 	for i in range(1, path.size() - 1):
@@ -78,8 +75,4 @@ func recalculate_path():
 	self.update()
 
 func _draw():
-	draw_polyline($MobPath.curve.get_baked_points(), Color.aquamarine, 5, true)
-
-func _process(delta):
-	if valid_path:
-		follower.offset += delta * 100
+	draw_polyline($MobSpawner/MobPath.curve.get_baked_points(), Color.aquamarine, 5, true)

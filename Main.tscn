@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/DungeonCrawl_ProjectUtumnoTileset.png" type="Texture" id=1]
 [ext_resource path="res://tower_grid/GridController.gd" type="Script" id=2]
 [ext_resource path="res://tower_grid/GridNode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mob/MobSpawner.gd" type="Script" id=4]
 [ext_resource path="res://Main.gd" type="Script" id=5]
 
 [sub_resource type="Curve2D" id=2]
@@ -17,20 +17,17 @@ script = ExtResource( 5 )
 script = ExtResource( 2 )
 grid_node = ExtResource( 3 )
 
-[node name="MobPath" type="Path2D" parent="GridController"]
+[node name="MobSpawner" type="Node2D" parent="GridController"]
+script = ExtResource( 4 )
+
+[node name="MobPath" type="Path2D" parent="GridController/MobSpawner"]
 z_index = 1
 curve = SubResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="MobPathFollower" type="PathFollow2D" parent="GridController/MobPath"]
-lookahead = 20.0
+[node name="MobTimer" type="Timer" parent="GridController/MobSpawner"]
+autostart = true
 
-[node name="Sprite" type="Sprite" parent="GridController/MobPath/MobPathFollower"]
-position = Vector2( 0, 2 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 672, 256, 32, 32 )
-
-[node name="MobSpawner" type="Node2D" parent="."]
+[connection signal="timeout" from="GridController/MobSpawner/MobTimer" to="GridController/MobSpawner" method="_on_MobTimer_timeout"]

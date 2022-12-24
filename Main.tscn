@@ -13,9 +13,6 @@ _data = {
 [node name="Main" type="Node2D"]
 position = Vector2( 128, 64 )
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="GridController" type="Node2D" parent="."]
 script = ExtResource( 2 )

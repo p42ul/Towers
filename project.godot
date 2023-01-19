@@ -14,6 +14,10 @@ config/name="Towers"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GridController="*res://grid/GridController.gd"
+
 [display]
 
 window/size/height=768

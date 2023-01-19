@@ -10,9 +10,10 @@ var end_grid_id = width*height + 2
 
 var grid = []
 var aStar = AStar2D.new()
-var valid_path = false
 
-export(PackedScene) var grid_node
+var grid_node = load("res://grid/GridNode.tscn")
+
+signal path_changed(path)
 
 func _ready():
 	aStar.reserve_space(width*height+2)
@@ -46,32 +47,33 @@ func _ready():
 func _get_node_id(x, y):
 	return y*width + x
 
-func _on_tower_created(x, y):
+func try_create_tower(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, true)
-	recalculate_path()
+	var path = self.recalculate_path()
+	if path.size() > 0:
+		emit_signal("path_changed", path)
+		return true
+	return false
 	
-func _on_tower_removed(x, y):
+func remove_tower(x, y):
 	var nodeId = _get_node_id(x, y)
 	aStar.set_point_disabled(nodeId, false)
-	recalculate_path()
+	var path = self.recalculate_path()
+	emit_signal("path_changed", path)
 
+# Returns empty list if no path can be found, a list of Vector2 otherwise.
 func recalculate_path():
-	var path = aStar.get_id_path(start_grid_id, end_grid_id)
-	if path.size() < 2:
-		valid_path = false
-		return
-	valid_path = true
-	var curve = $MobSpawner/MobPath.get_curve()
-	curve.clear_points()
-	# Strip the first and last path entry, which aren't in the grid
-	for i in range(1, path.size() - 1):
-		var grid_id = path[i]
+	var result = aStar.get_id_path(start_grid_id, end_grid_id)
+	var path = []
+	if result.size() < 2:
+		return path
+	# Strip the first and last pathfinding entries, which aren't in the grid
+	for i in range(1, result.size() - 1):
+		var grid_id = result[i]
 		var x = grid[grid_id].position.x + grid_node_size / 2
 		var y = grid[grid_id].position.y + grid_node_size / 2
-		curve.add_point(Vector2(x, y))
-	# Redraw the path
-	self.update()
+		path.append(Vector2(x, y))
+	return path
 
-func _draw():
-	draw_polyline($MobSpawner/MobPath.curve.get_baked_points(), Color.aquamarine, 5, true)
+

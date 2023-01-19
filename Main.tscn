@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://grid/GridController.gd" type="Script" id=2]
-[ext_resource path="res://grid/GridNode.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MobPath.gd" type="Script" id=1]
 [ext_resource path="res://mob/MobSpawner.gd" type="Script" id=4]
-[ext_resource path="res://Main.gd" type="Script" id=5]
 
 [sub_resource type="Curve2D" id=2]
 _data = {
@@ -12,29 +10,25 @@ _data = {
 
 [node name="Main" type="Node2D"]
 position = Vector2( 128, 64 )
-script = ExtResource( 5 )
 
-[node name="GridController" type="Node2D" parent="."]
-script = ExtResource( 2 )
-grid_node = ExtResource( 3 )
-
-[node name="MobSpawner" type="Node2D" parent="GridController"]
+[node name="MobSpawner" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
-[node name="MobPath" type="Path2D" parent="GridController/MobSpawner"]
+[node name="MobPath" type="Path2D" parent="MobSpawner"]
 z_index = 1
 curve = SubResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="MobTimer" type="Timer" parent="GridController/MobSpawner"]
+[node name="MobTimer" type="Timer" parent="MobSpawner"]
 autostart = true
 
-[node name="ReferenceRect" type="ReferenceRect" parent="GridController"]
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
 margin_right = 768.0
 margin_bottom = 384.0
 mouse_filter = 2
 border_width = 4.7
 
-[connection signal="timeout" from="GridController/MobSpawner/MobTimer" to="GridController/MobSpawner" method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="MobSpawner/MobTimer" to="MobSpawner" method="_on_MobTimer_timeout"]

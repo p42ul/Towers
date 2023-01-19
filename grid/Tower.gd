@@ -29,7 +29,6 @@ func attack(mob):
 		var projectile = projectile_instance.instance()
 		add_child(projectile)
 		projectile.direction = self.global_position.direction_to(mob.global_position)
-		print("attacking")
 		$AttackTimer.start()
 
 func set_active(active):

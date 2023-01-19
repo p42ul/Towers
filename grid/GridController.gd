@@ -40,9 +40,6 @@ func _ready():
 			node.y = y
 			add_child(node)
 			node.set_size(grid_node_size)
-			node.connect("tower_created", self, "_on_tower_created")
-			node.connect("tower_removed", self, "_on_tower_removed")
-	recalculate_path()
 
 func _get_node_id(x, y):
 	return y*width + x
@@ -54,6 +51,7 @@ func try_create_tower(x, y):
 	if path.size() > 0:
 		emit_signal("path_changed", path)
 		return true
+	aStar.set_point_disabled(nodeId, false)
 	return false
 	
 func remove_tower(x, y):

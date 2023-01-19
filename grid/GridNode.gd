@@ -5,7 +5,7 @@ var y
 var has_tower = false
 
 
-func _input_event(viewport, event, shape_idx):
+func _input_event(_viewport, _event, _shape_idx):
 	if Input.is_action_pressed("grid_draw"):
 		create_tower()
 	elif Input.is_action_pressed("grid_remove"):
@@ -25,13 +25,13 @@ func set_size(r: int):
 func create_tower():
 	if has_tower:
 		return
-	var path = GridController.try_create_tower(self.x, self.y)
-	if path.size() > 0:
+	if GridController.try_create_tower(self.x, self.y):
 		$Tower.set_active(true)
 		has_tower = true
 
 func remove_tower():
 	if not has_tower:
 		return
+	GridController.remove_tower(self.x, self.y)
 	$Tower.set_active(false)
 	has_tower = false

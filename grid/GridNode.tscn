@@ -24,6 +24,6 @@ scale = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [node name="Tower" parent="." instance=ExtResource( 1 )]
-frame = 1
+frame = 0
 
 [connection signal="input_event" from="." to="." method="_input_event"]

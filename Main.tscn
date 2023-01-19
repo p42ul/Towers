@@ -9,7 +9,6 @@ _data = {
 }
 
 [node name="Main" type="Node2D"]
-position = Vector2( 128, 64 )
 
 [node name="MobSpawner" type="Node2D" parent="."]
 script = ExtResource( 4 )

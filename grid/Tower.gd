@@ -2,14 +2,14 @@ extends AnimatedSprite
 
 var projectile_instance = preload("res://grid/Projectile.tscn")
 
-var active = false
+var is_active = false
 var attack_range = 128
 
 func _ready():
 	self.hide()
 
-func _process(delta):
-	if not active:
+func _process(_delta):
+	if not is_active:
 		return
 	var mobs = get_tree().get_nodes_in_group("mob")
 	if mobs.size() == 0:
@@ -32,8 +32,8 @@ func attack(mob):
 		$AttackTimer.start()
 
 func set_active(active):
-	if active:
+	self.is_active = active
+	if is_active:
 		self.show()
 	else:
 		self.hide()
-	self.active = active

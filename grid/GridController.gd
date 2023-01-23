@@ -3,7 +3,7 @@ extends Node2D
 var width = 24
 var height = 12
 
-var grid_node_size = 32
+var grid_node_diameter = 32
 
 var start_grid_id = width*height + 1
 var end_grid_id = width*height + 2
@@ -18,8 +18,8 @@ signal path_changed(path)
 func _ready():
 	aStar.reserve_space(width*height+2)
 	grid.resize(width*height)
-	aStar.add_point(start_grid_id, Vector2(-grid_node_size, height/2))
-	aStar.add_point(end_grid_id, Vector2(width*grid_node_size+grid_node_size, height/2))
+	aStar.add_point(start_grid_id, Vector2(-grid_node_diameter, height/2))
+	aStar.add_point(end_grid_id, Vector2(width*grid_node_diameter+grid_node_diameter, height/2))
 	for x in range(width):
 		for y in range(height):
 			var node = grid_node.instance()
@@ -34,12 +34,12 @@ func _ready():
 				aStar.connect_points(nodeId, _get_node_id(x-1, y))
 			if y > 0:
 				aStar.connect_points(nodeId, _get_node_id(x, y-1))
-			node.position.x = x*grid_node_size
-			node.position.y = y*grid_node_size
+			node.position.x = x*grid_node_diameter
+			node.position.y = y*grid_node_diameter
 			node.x = x
 			node.y = y
 			add_child(node)
-			node.set_size(grid_node_size)
+			node.set_radius(grid_node_diameter / 2)
 
 func _get_node_id(x, y):
 	return y*width + x
@@ -69,8 +69,8 @@ func recalculate_path():
 	# Strip the first and last pathfinding entries, which aren't in the grid
 	for i in range(1, result.size() - 1):
 		var grid_id = result[i]
-		var x = grid[grid_id].position.x + grid_node_size / 2
-		var y = grid[grid_id].position.y + grid_node_size / 2
+		var x = grid[grid_id].position.x + grid_node_diameter / 2
+		var y = grid[grid_id].position.y + grid_node_diameter / 2
 		path.append(Vector2(x, y))
 	return path
 

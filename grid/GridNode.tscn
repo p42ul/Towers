@@ -11,19 +11,18 @@ collision_layer = 32768
 collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="GridBorderSprite" type="ReferenceRect" parent="."]
-margin_right = 16.0
-margin_bottom = 16.0
-mouse_filter = 2
-border_color = Color( 0, 0, 0, 1 )
-editor_only = false
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 8 )
-scale = Vector2( 8, 8 )
+position = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Tower" parent="." instance=ExtResource( 1 )]
-frame = 0
+
+[node name="Outline" type="ReferenceRect" parent="."]
+margin_right = 1.0
+margin_bottom = 1.0
+mouse_filter = 2
+border_color = Color( 1, 1, 1, 1 )
+border_width = 1.4
+editor_only = false
 
 [connection signal="input_event" from="." to="." method="_input_event"]

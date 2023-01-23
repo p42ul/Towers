@@ -1,13 +1,15 @@
-extends AnimatedSprite
+extends Node2D
 
 var projectile_instance = preload("res://grid/Projectile.tscn")
 
 var is_active = false
 var attack_range = 128
+var radius = 0 
 
-func _ready():
-	self.hide()
-
+func set_radius(r: int):
+	self.radius = r
+	$ArcDrawer.set_radius(r)
+	
 func _process(_delta):
 	if not is_active:
 		return
@@ -24,16 +26,15 @@ func _process(_delta):
 	if nearest_distance < attack_range:
 		attack(nearest)
 		
+
 func attack(mob):
 	if $AttackTimer.is_stopped():
 		var projectile = projectile_instance.instance()
 		add_child(projectile)
+		projectile.position += Vector2(self.radius, self.radius) / 4
 		projectile.direction = self.global_position.direction_to(mob.global_position)
 		$AttackTimer.start()
 
 func set_active(active):
 	self.is_active = active
-	if is_active:
-		self.show()
-	else:
-		self.hide()
+	$ArcDrawer.is_active = active

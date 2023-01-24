@@ -13,8 +13,8 @@ func _input_event(_viewport, _event, _shape_idx):
 
 func set_radius(r: int):
 	self.radius = r
-	$CollisionShape2D.position.x = r/2
-	$CollisionShape2D.position.y = r/2
+	$CollisionShape2D.position.x = r
+	$CollisionShape2D.position.y = r
 	$CollisionShape2D.scale.x = r
 	$CollisionShape2D.scale.y = r
 

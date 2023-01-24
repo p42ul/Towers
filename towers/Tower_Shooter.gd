@@ -33,6 +33,6 @@ func attack(mob):
 	if $AttackTimer.is_stopped():
 		var projectile = projectile_instance.instance()
 		add_child(projectile)
-		projectile.position += Vector2(self.radius, self.radius) / 4
+		projectile.position += Vector2(self.radius, self.radius)
 		projectile.direction = self.global_position.direction_to(mob.global_position)
 		$AttackTimer.start()

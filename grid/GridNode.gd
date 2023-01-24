@@ -2,32 +2,33 @@ extends Area2D
 
 var x
 var y
-var has_tower = false
+var radius = 0
+var tower = null
 
 func _input_event(_viewport, _event, _shape_idx):
-	if Input.is_action_pressed("grid_draw"):
+	if Input.is_action_pressed("select"):
 		create_tower()
-	elif Input.is_action_pressed("grid_remove"):
+	elif Input.is_action_pressed("remove"):
 		remove_tower()
 
 func set_radius(r: int):
-	$Tower.set_radius(r)
+	self.radius = r
 	$CollisionShape2D.position.x = r/2
 	$CollisionShape2D.position.y = r/2
 	$CollisionShape2D.scale.x = r
 	$CollisionShape2D.scale.y = r
-	$Outline.rect_size = Vector2(r*2, r*2)
 
 func create_tower():
-	if has_tower:
+	if tower != null:
 		return
 	if GridController.try_create_tower(self.x, self.y):
-		$Tower.set_active(true)
-		has_tower = true
+		var tower = BuildTools.tower.instance()
+		self.add_child(tower)
+		self.tower = tower
 
 func remove_tower():
-	if not has_tower:
+	if tower == null:
 		return
 	GridController.remove_tower(self.x, self.y)
-	$Tower.set_active(false)
-	has_tower = false
+	self.tower.queue_free()
+	self.tower = null

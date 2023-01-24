@@ -2,17 +2,19 @@ extends Node2D
 
 var projectile_instance = preload("res://grid/Projectile.tscn")
 
-var is_active = false
 var attack_range = 128
-var radius = 0 
+var radius = 0
 
-func set_radius(r: int):
+
+func _ready():
+	var r = GridController.grid_node_diameter / 2
 	self.radius = r
-	$ArcDrawer.set_radius(r)
+	$ArcDrawer.radius = r
+	$ArcDrawer.position = Vector2(r/2, r/2)
+	$RectDrawer.width = r*2
+	$RectDrawer.height = r*2
 	
 func _process(_delta):
-	if not is_active:
-		return
 	var mobs = get_tree().get_nodes_in_group("mob")
 	if mobs.size() == 0:
 		return
@@ -34,7 +36,3 @@ func attack(mob):
 		projectile.position += Vector2(self.radius, self.radius) / 4
 		projectile.direction = self.global_position.direction_to(mob.global_position)
 		$AttackTimer.start()
-
-func set_active(active):
-	self.is_active = active
-	$ArcDrawer.is_active = active

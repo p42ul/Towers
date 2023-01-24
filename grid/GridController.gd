@@ -15,6 +15,12 @@ var grid_node = load("res://grid/GridNode.tscn")
 
 signal path_changed(path)
 
+func _draw():
+	for x in range(width+1):
+		for y in range(height+1):
+			draw_circle(Vector2(x*grid_node_diameter, y*grid_node_diameter),
+				1.0, Color.white)
+
 func _ready():
 	aStar.reserve_space(width*height+2)
 	grid.resize(width*height)

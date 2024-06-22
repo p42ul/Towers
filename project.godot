@@ -11,12 +11,13 @@ config_version=4
 [application]
 
 config/name="Towers"
-run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://global/Main.tscn"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
 GridController="*res://grid/GridController.gd"
+BuildTools="*res://global/BuildTools.gd"
 
 [display]
 
@@ -42,12 +43,12 @@ common/drop_mouse_on_gui_input_disabled=true
 
 [input]
 
-grid_draw={
+select={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-grid_remove={
+remove={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
@@ -63,4 +64,4 @@ quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0, 0, 0, 1 )
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://assets/default_env.tres"

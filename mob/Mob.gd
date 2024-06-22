@@ -1,7 +1,7 @@
 extends PathFollow2D
 
-export var speed = 100
-export var health = 3
+@export var speed = 100
+@export var health = 3
 var radius = 0
 
 signal reached_end
@@ -12,7 +12,7 @@ func _ready():
 
 func _process(delta):
 	self.offset += delta * speed
-	if self.unit_offset == 1.0:
+	if self.progress_ratio == 1.0:
 		emit_signal("reached_end")
 		self.queue_free()
 
@@ -25,4 +25,4 @@ func _on_projectile_area_entered(area):
 		self.queue_free()
 
 func _draw():
-	draw_circle(Vector2.ZERO, self.radius, Color.red)
+	draw_circle(Vector2.ZERO, self.radius, Color.RED)

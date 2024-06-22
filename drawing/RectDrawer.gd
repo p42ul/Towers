@@ -1,11 +1,11 @@
 extends Node2D
 
-export var width = 0
-export var height = 0
-export var color = Color.red
-export var filled = false
-export var line_width = 1.0
-export var is_active = true
+@export var width = 0
+@export var height = 0
+@export var color = Color.RED
+@export var filled = false
+@export var line_width = 1.0
+@export var is_active = true
 
 func _process(_delta):
 	self.update()

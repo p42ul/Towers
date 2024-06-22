@@ -22,7 +22,7 @@ func create_tower():
 	if tower != null:
 		return
 	if GridController.try_create_tower(self.x, self.y):
-		var tower = BuildTools.tower.instance()
+		var tower = BuildTools.tower.instantiate()
 		self.add_child(tower)
 		self.tower = tower
 

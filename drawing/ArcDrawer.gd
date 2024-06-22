@@ -1,9 +1,9 @@
 extends Node2D
 
-export var line_width = 2.0
-export var radius = 0
-export var color = Color.white
-export var filled = false
+@export var line_width = 2.0
+@export var radius = 0
+@export var color = Color.WHITE
+@export var filled = false
 
 func _process(_delta):
 	self.update()

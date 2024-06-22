@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-	BuildTools.connect("tool_changed", self, "_on_tool_changed")
+	BuildTools.connect("tool_changed", Callable(self, "_on_tool_changed"))
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if Input.is_action_pressed("select"):

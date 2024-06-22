@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array(  )
+"points": PackedVector2Array(  )
 }
 
 [node name="Main" type="Node2D"]
@@ -27,8 +27,8 @@ __meta__ = {
 autostart = true
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
-margin_right = 768.0
-margin_bottom = 384.0
+offset_right = 768.0
+offset_bottom = 384.0
 mouse_filter = 2
 border_width = 4.7
 

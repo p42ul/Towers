@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-	BuildTools.connect("tool_changed", self, "_on_tool_changed")
+	BuildTools.connect("tool_changed", Callable(self, "_on_tool_changed"))
 	# This is the default tool, so start with it filled
 	$RectDrawer.filled = true
 

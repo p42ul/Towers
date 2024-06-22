@@ -19,7 +19,7 @@ func _draw():
 	for x in range(width+1):
 		for y in range(height+1):
 			draw_circle(Vector2(x*grid_node_diameter, y*grid_node_diameter),
-				1.0, Color.white)
+				1.0, Color.WHITE)
 
 func _ready():
 	aStar.reserve_space(width*height+2)
@@ -28,7 +28,7 @@ func _ready():
 	aStar.add_point(end_grid_id, Vector2(width*grid_node_diameter+grid_node_diameter, height/2))
 	for x in range(width):
 		for y in range(height):
-			var node = grid_node.instance()
+			var node = grid_node.instantiate()
 			var nodeId = _get_node_id(x, y)
 			grid[nodeId] = node
 			aStar.add_point(nodeId, Vector2(x, y))

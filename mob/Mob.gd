@@ -1,7 +1,7 @@
 extends PathFollow2D
 
 export var speed = 100
-export var health = 50
+export var health = 3
 var radius = 0
 
 signal reached_end

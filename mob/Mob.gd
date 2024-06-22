@@ -7,7 +7,7 @@ var radius = 0
 signal reached_end
 
 func _ready():
-	self.radius = GridController.grid_node_diameter / 2
+	self.radius = GridController.grid_node_diameter / 2.0
 	$Area2D/CollisionShape2D.shape.radius = self.radius
 
 func _process(delta):

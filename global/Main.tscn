@@ -16,9 +16,6 @@ script = ExtResource("3")
 z_index = 1
 curve = SubResource("2")
 script = ExtResource("4")
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="MobTimer" type="Timer" parent="MobSpawner"]
 autostart = true

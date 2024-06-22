@@ -6,7 +6,7 @@ extends Node2D
 @export var filled = false
 
 func _process(_delta):
-	self.update()
+	self.queue_redraw()
 
 func _draw():
 	if self.filled:

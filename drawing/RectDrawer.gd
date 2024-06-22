@@ -8,7 +8,7 @@ extends Node2D
 @export var is_active = true
 
 func _process(_delta):
-	self.update()
+	self.queue_redraw()
 
 func _draw():
 	draw_rect(Rect2(0, 0, self.width, self.height), self.color, self.filled, self.line_width)

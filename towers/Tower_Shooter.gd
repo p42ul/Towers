@@ -31,7 +31,7 @@ func _process(_delta):
 
 func attack(mob):
 	if $AttackTimer.is_stopped():
-		var projectile = projectile_instance.instance()
+		var projectile = projectile_instance.instantiate()
 		add_child(projectile)
 		projectile.position += Vector2(self.radius, self.radius)
 		projectile.direction = self.global_position.direction_to(mob.global_position)

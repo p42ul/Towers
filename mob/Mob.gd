@@ -11,7 +11,7 @@ func _ready():
 	$Area2D/CollisionShape2D.shape.radius = self.radius
 
 func _process(delta):
-	self.offset += delta * speed
+	self.progress += delta * speed
 	if self.progress_ratio == 1.0:
 		emit_signal("reached_end")
 		self.queue_free()

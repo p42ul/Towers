@@ -10,7 +10,7 @@ func update_curve(path):
 		self.curve.add_point(v)
 		
 func _process(_delta):
-	self.update()
+	self.queue_redraw()
 
 func _draw():
 	if self.curve.get_baked_length() > 2:
